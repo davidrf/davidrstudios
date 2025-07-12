@@ -1,0 +1,26 @@
+# syntax=docker/dockerfile:1.4
+FROM node:24.3.0-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install pnpm 10.13.1 via Corepack
+RUN corepack enable && corepack prepare pnpm@10.13.1 --activate
+
+# Copy project files into the container
+COPY . .
+
+# Install dependencies and approve build scripts
+RUN pnpm install && pnpm approve-builds
+
+# Set env var to skip strict validation during build
+ENV SKIP_ENV_VALIDATION=true
+
+# Build the app (skip validation because runtime envs are injected later)
+RUN pnpm build
+
+# Expose the app port
+EXPOSE 3000
+
+# Default start command
+CMD ["pnpm", "start"]
