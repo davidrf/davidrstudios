@@ -1,29 +1,60 @@
-# Create T3 App
+## 🛠 Local Development Setup
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This project uses **Docker Compose** for local development and containers your entire T3 Stack environment. You do **not** need to install Node.js, pnpm, or any other dependencies globally.
 
-## What's next? How do I make an app with this?
+### ✅ Prerequisites
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- [Docker](https://www.docker.com/get-started) installed (Docker Desktop or CLI)
+- [pnpm](https://pnpm.io/) (optional, for local dev without Docker)
+- `.env` file at the project root (see below)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+---
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### 📁 `.env` Setup
 
-## Learn More
+Create a `.env` file in the root of the project with the following variables:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+```
+AUTH_SECRET=your-dev-secret
+AUTH_DISCORD_ID=your-discord-client-id
+AUTH_DISCORD_SECRET=your-discord-client-secret
+DATABASE_URL=file:./dev.db
+```
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+> ❗ **Never commit `.env` files** — this is already in `.gitignore`.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+---
 
-## How do I deploy this?
+### 🚀 Run the app locally (with Docker)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```
+docker-compose up --build
+```
+
+This will:
+- Build the image using `Dockerfile.dev`
+- Inject your `.env` values
+- Start the app on [http://localhost:3000](http://localhost:3000)
+
+---
+
+### 🧪 Common Commands
+
+| Task                         | Command                        |
+|------------------------------|--------------------------------|
+| Rebuild after code change    | `docker-compose up --build`   |
+| Enter container shell        | `docker-compose run web sh`   |
+| Tear down everything         | `docker-compose down`         |
+
+---
+
+### 🤓 Optional: Local dev without Docker
+
+If you prefer to run things directly on your machine:
+
+```
+pnpm install
+pnpm dev
+```
+
+Make sure you have the right Node version (`24.3.0`) and pnpm (`10.13.1`) installed. If you use [`asdf`](https://asdf-vm.com/) or `nvm`, check the `.tool-versions` or `.nvmrc` file.
