@@ -44,3 +44,16 @@ yarn-error.log*
 
 # idea files
 .idea
+
+# Terraform state
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Sensitive input values
+terraform.tfvars
+*.tfvars
+
+# Optional: ignore plan output files
+*.tfplan
