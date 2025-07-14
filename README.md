@@ -58,3 +58,53 @@ pnpm dev
 ```
 
 Make sure you have the right Node version (`24.3.0`) and pnpm (`10.13.1`) installed. If you use [`asdf`](https://asdf-vm.com/) or `nvm`, check the `.tool-versions` or `.nvmrc` file.
+
+## 🛠️ Infrastructure Setup with Terraform + AWS
+
+This project uses **Terraform** to manage AWS infrastructure, including the ECR registry that hosts the production Docker image.
+
+---
+
+### 📦 Tools Required
+
+Make sure you have the following installed:
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [aws-vault](https://github.com/99designs/aws-vault)
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+
+---
+
+### 🔐 AWS SSO Setup
+
+See our internal docs for how to configure `~/.aws/config` with SSO.
+
+Be sure to set your AWS profile and sign in:
+
+```bash
+export AWS_PROFILE=admin
+aws-vault login $AWS_PROFILE
+```
+
+---
+
+### 📁 Terraform Commands
+
+Use the provided wrapper script to run Terraform commands with the correct AWS profile and working directory:
+
+#### Example: Initialize
+
+```bash
+./infra/aws.sh init -reconfigure
+```
+
+#### Example: Plan
+
+```bash
+./infra/aws.sh plan
+```
+
+#### Example: Apply
+
+```bash
+./infra/aws.sh apply -auto-approve
+```
