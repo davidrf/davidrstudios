@@ -10,7 +10,5 @@ resource "aws_ecr_repository" "app" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name = var.app_name
-  }
+  tags = var.tags
 }
