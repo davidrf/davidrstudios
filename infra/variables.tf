@@ -6,9 +6,9 @@ variable "app_name" {
   default = "davidrstudios"
 }
 
-variable "domain_name" {
-  description = "David Rodriguez Studios"
-  default     = "davidrstudios.com"
+variable "github_repo" {
+  description = "GitHub repository URL"
+  default     = "https://github.com/davidrf/davidrstudios"
 }
 
 variable "tags" {
