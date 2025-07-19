@@ -94,17 +94,17 @@ Use the provided wrapper script to run Terraform commands with the correct AWS p
 #### Example: Initialize
 
 ```bash
-./infra/aws.sh init -reconfigure
+./infra/tf.sh init -reconfigure
 ```
 
 #### Example: Plan
 
 ```bash
-./infra/aws.sh plan
+./infra/tf.sh plan
 ```
 
 #### Example: Apply
 
 ```bash
-./infra/aws.sh apply -auto-approve
+./infra/tf.sh apply -auto-approve
 ```

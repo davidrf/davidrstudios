@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '**.ts'
+      - '**.tsx'
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'next.config.js'
+      - 'Dockerfile'
+      - 'Dockerfile.dev'
+      - 'buildspec.yml'
+      - 'docker-compose.yml'
 
 permissions:
   id-token: write
