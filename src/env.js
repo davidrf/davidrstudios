@@ -1,9 +1,6 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-console.log("DATABASE_URL at load time:", process.env.DATABASE_URL);
-console.log("NEXTAUTH_URL at load time:", process.env.NEXTAUTH_URL);
-
 export const env = createEnv({
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app
@@ -17,7 +14,7 @@ export const env = createEnv({
     AUTH_DISCORD_ID: z.string(),
     AUTH_DISCORD_SECRET: z.string(),
     DATABASE_URL: z.string(),
-    NEXTAUTH_URL: z.string().url(),
+    NEXTAUTH_URL: z.string().url().optional(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
