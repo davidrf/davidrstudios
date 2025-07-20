@@ -38,19 +38,19 @@ resource "aws_ecs_task_definition" "app" {
       secrets = [
         {
           name      = "AUTH_SECRET"
-          valueFrom = aws_secretsmanager_secret.app_env.arn
+          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:AUTH_SECRET::"
         },
         {
           name      = "AUTH_DISCORD_ID"
-          valueFrom = aws_secretsmanager_secret.app_env.arn
+          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:AUTH_DISCORD_ID::"
         },
         {
           name      = "AUTH_DISCORD_SECRET"
-          valueFrom = aws_secretsmanager_secret.app_env.arn
+          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:AUTH_DISCORD_SECRET::"
         },
         {
           name      = "DATABASE_URL"
-          valueFrom = aws_secretsmanager_secret.app_env.arn
+          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:DATABASE_URL::"
         }
       ]
     }
@@ -65,7 +65,7 @@ resource "aws_ecs_service" "app" {
   cluster         = aws_ecs_cluster.app.id
   task_definition = aws_ecs_task_definition.app.arn
   launch_type     = "FARGATE"
-  desired_count   = 0
+  desired_count   = 1
 
   network_configuration {
     subnets          = data.terraform_remote_state.infra_shared.outputs.public_subnet_ids
