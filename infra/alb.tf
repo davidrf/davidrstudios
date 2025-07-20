@@ -104,28 +104,6 @@ resource "aws_security_group" "ecs_service" {
   tags = var.tags
 }
 
-resource "aws_ecs_service" "app" {
-  name            = var.app_name
-  cluster         = aws_ecs_cluster.app.id
-  task_definition = aws_ecs_task_definition.app.arn
-  launch_type     = "FARGATE"
-  desired_count   = 0
-
-  network_configuration {
-    subnets          = data.terraform_remote_state.infra_shared.outputs.public_subnet_ids
-    assign_public_ip = true
-    security_groups  = [aws_security_group.ecs_service.id]
-  }
-
-  load_balancer {
-    target_group_arn = aws_lb_target_group.app.arn
-    container_name   = var.app_name
-    container_port   = 3000
-  }
-
-  depends_on = [aws_lb_listener.https]
-}
-
 resource "aws_s3_bucket" "alb_logs" {
   bucket = "${var.app_name}-alb-logs"
   tags   = var.tags
