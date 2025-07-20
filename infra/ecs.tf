@@ -51,7 +51,11 @@ resource "aws_ecs_task_definition" "app" {
         {
           name      = "DATABASE_URL"
           valueFrom = "${aws_secretsmanager_secret.app_env.arn}:DATABASE_URL::"
-        }
+        },
+        {
+          name      = "NEXTAUTH_URL"
+          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:NEXTAUTH_URL::"
+        },
       ]
     }
   ])
