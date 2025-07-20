@@ -37,18 +37,6 @@ resource "aws_ecs_task_definition" "app" {
       }
       secrets = [
         {
-          name      = "AUTH_SECRET"
-          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:AUTH_SECRET::"
-        },
-        {
-          name      = "AUTH_DISCORD_ID"
-          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:AUTH_DISCORD_ID::"
-        },
-        {
-          name      = "AUTH_DISCORD_SECRET"
-          valueFrom = "${aws_secretsmanager_secret.app_env.arn}:AUTH_DISCORD_SECRET::"
-        },
-        {
           name      = "DATABASE_URL"
           valueFrom = "${aws_secretsmanager_secret.app_env.arn}:DATABASE_URL::"
         },

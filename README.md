@@ -15,9 +15,6 @@ This project uses **Docker Compose** for local development and containers your e
 Create a `.env` file in the root of the project with the following variables:
 
 ```
-AUTH_SECRET=your-dev-secret
-AUTH_DISCORD_ID=your-discord-client-id
-AUTH_DISCORD_SECRET=your-discord-client-secret
 DATABASE_URL=file:./dev.db
 ```
 
