@@ -2,6 +2,13 @@ resource "aws_ecs_cluster" "app" {
   name = var.app_name
 }
 
+resource "aws_cloudwatch_log_group" "ecs" {
+  name              = "/ecs/${var.app_name}"
+  retention_in_days = 7
+
+  tags = var.tags
+}
+
 resource "aws_ecs_task_definition" "app" {
   family                   = var.app_name
   network_mode             = "awsvpc"
