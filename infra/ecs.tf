@@ -35,6 +35,24 @@ resource "aws_ecs_task_definition" "app" {
           awslogs-stream-prefix = "ecs"
         }
       }
+      secrets = [
+        {
+          name      = "AUTH_SECRET"
+          valueFrom = aws_secretsmanager_secret.app_env.arn
+        },
+        {
+          name      = "AUTH_DISCORD_ID"
+          valueFrom = aws_secretsmanager_secret.app_env.arn
+        },
+        {
+          name      = "AUTH_DISCORD_SECRET"
+          valueFrom = aws_secretsmanager_secret.app_env.arn
+        },
+        {
+          name      = "DATABASE_URL"
+          valueFrom = aws_secretsmanager_secret.app_env.arn
+        }
+      ]
     }
   ])
 
