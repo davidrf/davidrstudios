@@ -3,9 +3,6 @@ version: 0.2
 env:
   variables:
     IMAGE_TAG: latest
-    AWS_REGION: us-west-2
-    ECS_CLUSTER_NAME: davidrstudios
-    ECS_SERVICE_NAME: davidrstudios
 
 phases:
   pre_build:

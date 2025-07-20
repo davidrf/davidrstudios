@@ -74,6 +74,21 @@ resource "aws_codebuild_project" "codebuild" {
       name  = "REPOSITORY_URI"
       value = aws_ecr_repository.app.repository_url
     }
+
+    environment_variable {
+      name  = "ECS_CLUSTER_NAME"
+      value = var.app_name
+    }
+
+    environment_variable {
+      name  = "ECS_SERVICE_NAME"
+      value = var.app_name
+    }
+
+    environment_variable {
+      name  = "AWS_REGION"
+      value = var.aws_region
+    }
   }
 
   tags = var.tags
