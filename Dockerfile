@@ -12,14 +12,7 @@ COPY . .
 # Install dependencies
 RUN pnpm install --frozen-lockfile && pnpm approve-builds
 
-# Set SKIP_ENV_VALIDATION only during build, not runtime
-ENV SKIP_ENV_VALIDATION=true
 ENV NODE_ENV=production
 RUN pnpm build
 
-# Unset the skip validation for runtime
-ENV SKIP_ENV_VALIDATION=
-
-EXPOSE 3000
-
-CMD ["pnpm", "start"]
+CMD ["pnpm", "build"]

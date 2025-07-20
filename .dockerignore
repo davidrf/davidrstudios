@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+Dockerfile*
+.dockerignore
+.git
+.gitignore
+.env
+*.tfstate
+.terraform
