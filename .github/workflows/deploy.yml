@@ -13,9 +13,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'next.config.js'
       - 'Dockerfile'
-      - 'Dockerfile.dev'
       - 'buildspec.yml'
-      - 'docker-compose.yml'
 
 permissions:
   id-token: write
