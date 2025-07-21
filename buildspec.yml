@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 20
+
+  build:
+    commands:
+      - echo "Building Astro site Docker image"
+      - docker build -t davidrstudios-build -f Dockerfile .
+      - docker create --name davidrstudios-container davidrstudios-build
+      - docker cp davidrstudios-container:/app/dist ./dist
+      - docker rm davidrstudios-container
+
+  post_build:
+    commands:
+      - echo "Uploading dist/ to S3 bucket $S3_BUCKET"
+      - aws s3 sync ./dist s3://$S3_BUCKET --delete

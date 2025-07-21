@@ -14,5 +14,3 @@ RUN pnpm install --frozen-lockfile && pnpm approve-builds
 
 ENV NODE_ENV=production
 RUN pnpm build
-
-CMD ["pnpm", "build"]
