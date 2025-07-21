@@ -40,3 +40,25 @@ resource "aws_s3_bucket_website_configuration" "static_site" {
     key = "404.html"
   }
 }
+
+resource "aws_s3_bucket" "www_redirect" {
+  bucket = "www.davidrstudios.com"
+  tags   = var.tags
+}
+
+resource "aws_s3_bucket_website_configuration" "www_redirect" {
+  bucket = aws_s3_bucket.www_redirect.id
+
+  redirect_all_requests_to {
+    host_name = "davidrstudios.com"
+    protocol  = "https"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "www_redirect" {
+  bucket                  = aws_s3_bucket.www_redirect.id
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
