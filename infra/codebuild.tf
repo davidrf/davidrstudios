@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "codebuild_service_role" {
   name = "${var.app_name}-codebuild-service-role"
 
@@ -17,8 +19,8 @@ resource "aws_iam_role" "codebuild_service_role" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy" "codebuild_s3_policy" {
-  name = "${var.app_name}-codebuild-s3-policy"
+resource "aws_iam_role_policy" "codebuild_execution_policy" {
+  name = "${var.app_name}-codebuild-execution-policy"
   role = aws_iam_role.codebuild_service_role.id
 
   policy = jsonencode({
@@ -36,6 +38,15 @@ resource "aws_iam_role_policy" "codebuild_s3_policy" {
           "${aws_s3_bucket.static_site.arn}",
           "${aws_s3_bucket.static_site.arn}/*"
         ]
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Resource = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/codebuild/${aws_codebuild_project.static_site.name}*"
       }
     ]
   })
