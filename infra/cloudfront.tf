@@ -6,7 +6,7 @@ resource "aws_cloudfront_distribution" "static_site" {
   aliases = ["davidrstudios.com"]
 
   origin {
-    domain_name = aws_s3_bucket.static_site.bucket_regional_domain_name
+    domain_name = aws_s3_bucket_website_configuration.static_site.website_endpoint
     origin_id   = "s3-origin"
 
     custom_origin_config {
